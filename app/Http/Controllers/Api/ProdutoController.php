@@ -47,14 +47,16 @@ class ProdutoController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    
     public function update(ProdutoRequest $request, Produto $produto)
     {
         $dados = $request->validated();
 
-        $produto->update($dados);
+        $produto = $this->service->update($produto, $dados);
 
         return new ProdutoResource($produto);
     }
+
 
     /**
      * Remove the specified resource from storage.
