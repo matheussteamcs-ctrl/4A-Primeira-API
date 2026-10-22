@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\EstadoResource;
 use App\Services\IbgeService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class EstadoController extends Controller
 {
@@ -12,10 +14,10 @@ class EstadoController extends Controller
         private IbgeService $service
     ) {}
 
-    public function index(): JsonResponse
+    public function index(): AnonymousResourceCollection
     {
-        return response()->json(
-            $this->service->listarEstados()
+        return EstadoResource::collection(
+            collect($this->service->listarEstados())
         );
     }
 
